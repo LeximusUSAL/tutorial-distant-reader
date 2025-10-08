@@ -306,6 +306,30 @@ conda install -c conda-forge numpy pandas
 rdr build prueba ~/Desktop/TXT
 ```
 
+**⚠️ ERROR: "KeyError: notebooksHome" al ejecutar `rdr build`:**
+
+Este error aparece cuando la configuración de Distant Reader está incompleta. **SOLUCIÓN:**
+
+```bash
+# Inicializar configuración de Distant Reader
+rdr set -s tika
+```
+
+**Lo que verás:**
+- Puede pedir confirmar la ubicación de tika-server.jar
+- Presiona Enter para aceptar la ubicación por defecto
+- Verás: "Configuration updated"
+
+**Ahora SÍ construye tu carrel:**
+```bash
+rdr build prueba ~/Desktop/TXT
+```
+
+**NOTA IMPORTANTE sobre Java:**
+- Tika necesita Java para funcionar
+- En Mac normalmente Java ya viene instalado
+- Si ves error "Java not found", descarga Java desde: https://www.java.com/download/
+
 **Comando 5: Verificar**
 
 **⚠️ IMPORTANTE: Asegúrate de ver `(reader-toolbox)` al inicio de la línea.**
@@ -570,6 +594,30 @@ conda install -c conda-forge numpy pandas
 ```bash
 python -m rdr build prueba "C:\Users\User\Desktop\TXT"
 ```
+
+**⚠️ ERROR: "KeyError: notebooksHome" al ejecutar `rdr build`:**
+
+Este error aparece cuando la configuración de Distant Reader está incompleta. **SOLUCIÓN:**
+
+```bash
+# Inicializar configuración de Distant Reader
+python -m rdr set -s tika
+```
+
+**Lo que verás:**
+- Puede pedir confirmar la ubicación de tika-server.jar
+- Presiona Enter para aceptar la ubicación por defecto
+- Verás: "Configuration updated"
+
+**Ahora SÍ construye tu carrel:**
+```bash
+python -m rdr build prueba "C:\Users\User\Desktop\TXT"
+```
+
+**NOTA IMPORTANTE sobre Java:**
+- Tika necesita Java para funcionar
+- Si ves error "Java not found", descarga Java desde: https://www.java.com/download/
+- Instala Java y vuelve a intentar
 
 **Comando 5: Verificar que todo funciona**
 

@@ -295,7 +295,20 @@ conda activate reader-toolbox
 - Al principio de la línea aparecerá `(reader-toolbox)` ← ¡Esto es buena señal!
 - Ejemplo: `(reader-toolbox) maria@MacBook ~ %`
 
-**Comando 3: Instalar reader-toolbox**
+**Comando 3: Instalar dependencias con conda (opcional en Mac, recomendado)**
+```bash
+conda install -c conda-forge spacy
+```
+
+**Lo que verás:**
+- Lista de paquetes a instalar
+- Preguntará: `Proceed ([y]/n)?`
+- **Escribe `y` y presiona Enter**
+- Tardará 1-2 minutos
+
+**Nota:** En Mac este paso es opcional (generalmente funciona sin él), pero lo recomendamos para evitar posibles errores de compilación.
+
+**Comando 4: Instalar reader-toolbox**
 ```bash
 pip install reader-toolbox
 ```
@@ -305,7 +318,7 @@ pip install reader-toolbox
 - Tardará 2-3 minutos
 - Al final dirá: `Successfully installed reader-toolbox...`
 
-**Comando 4: Verificar**
+**Comando 5: Verificar**
 
 **⚠️ IMPORTANTE: Asegúrate de ver `(reader-toolbox)` al inicio de la línea.**
 
@@ -523,17 +536,35 @@ conda activate reader-toolbox
 - Ejecuta: `conda activate reader-toolbox`
 - Ahí SÍ aparecerá: `(reader-toolbox)`
 
-**Comando 3: Instalar reader-toolbox**
+**Comando 3: Instalar dependencias con conda (IMPORTANTE - evita errores)**
+```bash
+conda install -c conda-forge spacy
+```
+
+**Lo que verás:**
+- Lista de paquetes a instalar (incluyendo blis, cymem, murmurhash)
+- Preguntará: `Proceed ([y]/n)?`
+- **Escribe `y` y presiona Enter**
+- Tardará 1-2 minutos instalando versiones precompiladas
+
+**¿Por qué este paso?** Conda instala versiones precompiladas de paquetes que requieren compilación C++, evitando el error "Microsoft Visual C++ 14.0 required".
+
+**Comando 4: Instalar reader-toolbox**
 ```bash
 pip install reader-toolbox
 ```
 
 **Lo que verás:**
-- Empezará a descargar paquetes
+- Empezará a descargar paquetes adicionales
 - Tardará 2-3 minutos
 - Al final dirá: `Successfully installed reader-toolbox...`
 
-**Comando 4: Verificar**
+**⚠️ Si ves error "Microsoft Visual C++ 14.0 or greater is required" o "Failed building wheel for blis":**
+- Significa que olvidaste ejecutar el Comando 3
+- Vuelve atrás y ejecuta: `conda install -c conda-forge spacy`
+- Luego vuelve a intentar: `pip install reader-toolbox`
+
+**Comando 5: Verificar que todo funciona**
 
 **⚠️ IMPORTANTE: Asegúrate de ver `(reader-toolbox)` al inicio de la línea.**
 
@@ -556,7 +587,29 @@ rdr --help
 
 ---
 
-### **PASO 5: Cómo usar Distant Reader cada vez que trabajes**
+### **PASO 5: Resumen de instalación completa**
+
+**Comandos completos que ejecutaste:**
+```bash
+# 1. Crear entorno
+conda create -n reader-toolbox python=3.9
+
+# 2. Activar entorno
+conda activate reader-toolbox
+
+# 3. Instalar dependencias precompiladas
+conda install -c conda-forge spacy
+
+# 4. Instalar reader-toolbox
+pip install reader-toolbox
+
+# 5. Verificar
+rdr --help
+```
+
+---
+
+### **PASO 6: Cómo usar Distant Reader cada vez que trabajes**
 
 **⚠️ MUY IMPORTANTE:** Cada vez que abras PowerShell/Anaconda Prompt, debes activar el entorno ANTES de usar cualquier comando `rdr`.
 

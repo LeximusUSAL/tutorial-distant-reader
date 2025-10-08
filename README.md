@@ -306,24 +306,33 @@ pip install reader-toolbox
 - Al final dirá: `Successfully installed reader-toolbox...`
 
 **Comando 4: Verificar**
+
+**⚠️ IMPORTANTE: Asegúrate de ver `(reader-toolbox)` al inicio de la línea.**
+
+Si NO lo ves, ejecuta primero: `conda activate reader-toolbox`
+
+Una vez que veas `(reader-toolbox) maria@MacBook ~ %`, ejecuta:
+
 ```bash
 rdr --help
 ```
 
 **Lo que verás:**
-- Una lista de comandos disponibles
+- Una lista de comandos disponibles (catalog, build, summarize, etc.)
 - Si ves esto, ¡TODO FUNCIONÓ! ✅
 
 ---
 
 ### **PASO 5: Cómo usar Distant Reader cada vez que trabajes**
 
-**Cada vez que quieras usar Distant Reader:**
+**⚠️ MUY IMPORTANTE:** Cada vez que abras Terminal, debes activar el entorno ANTES de usar cualquier comando `rdr`.
+
+**Pasos cada vez que trabajes:**
 
 1. Abre Terminal
-2. Ejecuta: `conda activate reader-toolbox`
-3. Verás `(reader-toolbox)` al inicio de la línea
-4. Ya puedes usar comandos como `rdr build`, `rdr summarize`, etc.
+2. **PRIMERO ejecuta:** `conda activate reader-toolbox`
+3. Verás `(reader-toolbox)` al inicio de la línea ← **Esto es obligatorio**
+4. AHORA SÍ puedes usar comandos como `rdr build`, `rdr summarize`, etc.
 
 **Para salir del entorno:**
 ```bash
@@ -500,24 +509,38 @@ pip install reader-toolbox
 - Al final dirá: `Successfully installed reader-toolbox...`
 
 **Comando 4: Verificar**
+
+**⚠️ IMPORTANTE: Asegúrate de ver `(reader-toolbox)` al inicio de la línea.**
+
+Si NO lo ves, ejecuta primero: `conda activate reader-toolbox`
+
+Una vez que veas `(reader-toolbox) PS C:\Users\User>`, ejecuta:
+
 ```bash
 rdr --help
 ```
 
 **Lo que verás:**
-- Una lista de comandos disponibles
+- Una lista de comandos disponibles (catalog, build, summarize, etc.)
 - Si ves esto, ¡TODO FUNCIONÓ! ✅
+
+**Si ves error "No se encuentra la unidad":**
+- Significa que NO activaste el entorno
+- Ejecuta: `conda activate reader-toolbox`
+- Luego vuelve a intentar: `rdr --help`
 
 ---
 
 ### **PASO 5: Cómo usar Distant Reader cada vez que trabajes**
 
-**Cada vez que quieras usar Distant Reader:**
+**⚠️ MUY IMPORTANTE:** Cada vez que abras PowerShell/Anaconda Prompt, debes activar el entorno ANTES de usar cualquier comando `rdr`.
+
+**Pasos cada vez que trabajes:**
 
 1. Abre PowerShell (o Anaconda Prompt)
-2. Ejecuta: `conda activate reader-toolbox`
-3. Verás `(reader-toolbox)` al inicio de la línea
-4. Ya puedes usar comandos como `rdr build`, `rdr summarize`, etc.
+2. **PRIMERO ejecuta:** `conda activate reader-toolbox`
+3. Verás `(reader-toolbox)` al inicio de la línea ← **Esto es obligatorio**
+4. AHORA SÍ puedes usar comandos como `rdr build`, `rdr summarize`, etc.
 
 **Para salir del entorno:**
 ```bash
@@ -549,6 +572,29 @@ conda deactivate
 - Cierra y vuelve a abrir PowerShell/Anaconda Prompt
 - Si persiste, reinicia la computadora
 - Usa "Anaconda Prompt" del menú de Windows
+
+**Problema 4: Error "rdr : No se encuentra la unidad"**
+
+**Este error significa que NO activaste el entorno conda.**
+
+El error completo es:
+```
+rdr : No se encuentra la unidad. No existe ninguna unidad con el nombre '--help'.
+```
+
+**Solución:**
+```bash
+# PRIMERO activa el entorno
+conda activate reader-toolbox
+
+# AHORA verás (reader-toolbox) al principio de la línea
+# Ejemplo: (reader-toolbox) PS C:\Users\User>
+
+# AHORA SÍ puedes usar rdr
+rdr --help
+```
+
+**RECUERDA:** Debes ejecutar `conda activate reader-toolbox` CADA VEZ que abras PowerShell antes de usar cualquier comando `rdr`.
 
 ---
 

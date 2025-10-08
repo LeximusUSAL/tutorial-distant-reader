@@ -318,6 +318,24 @@ pip install reader-toolbox
 - Tardará 2-3 minutos
 - Al final dirá: `Successfully installed reader-toolbox...`
 
+**⚠️ NUEVO ERROR CRÍTICO: Si ves "ValueError: numpy.dtype size changed" al ejecutar rdr build:**
+
+Este error aparece cuando hay incompatibilidad entre versiones de numpy y pandas. **SOLUCIÓN:**
+
+```bash
+# Desinstalar numpy y pandas actuales
+pip uninstall numpy pandas -y
+
+# Reinstalar versiones compatibles
+conda install -c conda-forge numpy pandas
+```
+
+**Lo que verás:**
+- Preguntará: `Proceed ([y]/n)?`
+- Escribe `y` y presiona Enter
+- Tardará 1-2 minutos
+- Al final verás: `done`
+
 **Comando 5: Verificar**
 
 **⚠️ IMPORTANTE: Asegúrate de ver `(reader-toolbox)` al inicio de la línea.**
@@ -563,6 +581,24 @@ pip install reader-toolbox
 - Significa que olvidaste ejecutar el Comando 3
 - Vuelve atrás y ejecuta: `conda install -c conda-forge spacy`
 - Luego vuelve a intentar: `pip install reader-toolbox`
+
+**⚠️ NUEVO ERROR CRÍTICO: Si ves "ValueError: numpy.dtype size changed" al ejecutar rdr build:**
+
+Este error aparece cuando hay incompatibilidad entre versiones de numpy y pandas. **SOLUCIÓN:**
+
+```bash
+# Desinstalar numpy y pandas actuales
+pip uninstall numpy pandas -y
+
+# Reinstalar versiones compatibles
+conda install -c conda-forge numpy pandas
+```
+
+**Lo que verás:**
+- Preguntará: `Proceed ([y]/n)?`
+- Escribe `y` y presiona Enter
+- Tardará 1-2 minutos
+- Al final verás: `done`
 
 **Comando 5: Verificar que todo funciona**
 

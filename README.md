@@ -125,53 +125,16 @@ Reemplaza `TuNombre` con tu nombre de usuario y presiona Enter.
 
 ---
 
-## PASO 3: Instalar Distant Reader
+## PASO 3: Instalar Distant Reader con Conda
 
-**Distant Reader (reader-toolbox)** es el programa que construye carrels. Necesitas instalarlo antes de poder analizar textos.
-
-### 3.1. Instalación en Mac
-
-En Mac tienes dos opciones: instalación directa con pip (más simple) o instalación con Conda (recomendada para trabajos de investigación).
-
-#### Opción A: Instalación simple con pip
-
-Esta es la forma más rápida si solo quieres probar Distant Reader.
-
-1. Abre Terminal
-
-2. Escribe este comando y presiona Enter:
-
-```bash
-pip install reader-toolbox
-```
-
-3. Espera a que termine la instalación (puede tardar 1-2 minutos)
-
-4. Verifica que funcionó escribiendo:
-
-```bash
-rdr --help
-```
-
-Deberías ver un mensaje de ayuda con una lista de comandos disponibles.
-
-**¿Ya terminaste?** Ve directamente al PASO 4 para construir tu primer carrel.
-
----
-
-#### Opción B: Instalación con Conda (recomendada para investigación)
+**Distant Reader (reader-toolbox)** es el programa que construye carrels. Vamos a instalarlo usando **Conda**, un gestor de entornos que mantiene todo organizado y evita conflictos.
 
 **¿Qué es Conda?**
-
-Conda es un gestor de "entornos virtuales" que mantiene tus proyectos organizados y separados. Es especialmente útil si trabajas con múltiples proyectos de investigación o si planeas usar Distant Reader regularmente.
-
-**Ventajas de usar Conda:**
-- Mantiene las dependencias de Distant Reader separadas de otros programas
-- Evita conflictos entre diferentes versiones de Python
-- Te permite tener múltiples versiones de herramientas instaladas sin problemas
-- Es la forma profesional de gestionar proyectos de programación
+Conda mantiene Distant Reader separado de otros programas en tu computadora, evitando problemas de compatibilidad.
 
 ---
+
+### 3.1. Instalación en Mac
 
 ### **PASO 1: Descargar Miniconda para Mac**
 
@@ -420,13 +383,7 @@ conda activate reader-toolbox
 
 ### 3.2. Instalación en Windows
 
-**IMPORTANTE PARA WINDOWS:** En Windows, la instalación con Conda es **OBLIGATORIA para la mayoría de usuarios** porque evita errores de compilación de paquetes C++ (cymem, murmurhash, pandas). La instalación directa con pip requiere instalar Visual C++ Build Tools (7 GB, 30-45 minutos) y puede fallar.
-
-#### Opción A: Instalación con Conda (RECOMENDADA - 100% de éxito)
-
 ### **PASO 1: Descargar Miniconda**
-
-**En Windows:**
 
 1. Abre tu navegador web (Chrome, Edge, Firefox)
 2. Ve a esta dirección EXACTA: https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe

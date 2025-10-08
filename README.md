@@ -573,17 +573,37 @@ Si NO lo ves, ejecuta primero: `conda activate reader-toolbox`
 Una vez que veas `(reader-toolbox) PS C:\Users\User>`, ejecuta:
 
 ```bash
-rdr --help
+python -m rdr --help
 ```
+
+**NOTA:** En Windows PowerShell, debes usar `python -m rdr` en lugar de solo `rdr` porque PowerShell confunde `rdr` con un comando interno de Windows (Remove-PSDrive).
 
 **Lo que verás:**
 - Una lista de comandos disponibles (catalog, build, summarize, etc.)
 - Si ves esto, ¡TODO FUNCIONÓ! ✅
 
-**Si ves error "No se encuentra la unidad":**
-- Significa que NO activaste el entorno
+**Si TODAVÍA ves error "No se encuentra la unidad" con `rdr --help`:**
+
+**SOLUCIÓN 1 (recomendada): Usa `python -m rdr` siempre**
+```bash
+python -m rdr --help
+python -m rdr build mi-carrel ~/Desktop/MiCorpus
+python -m rdr summarize mi-carrel
+```
+
+**SOLUCIÓN 2: Usa Anaconda Prompt en lugar de PowerShell**
+- Cierra PowerShell
+- Busca "Anaconda Prompt" en el menú Windows
+- Ábrelo
 - Ejecuta: `conda activate reader-toolbox`
-- Luego vuelve a intentar: `rdr --help`
+- En Anaconda Prompt SÍ funciona: `rdr --help`
+
+**SOLUCIÓN 3: Usa CMD en lugar de PowerShell**
+- Cierra PowerShell
+- Busca "cmd" en el menú Windows
+- Ábrelo
+- Ejecuta: `conda activate reader-toolbox`
+- En CMD SÍ funciona: `rdr --help`
 
 ---
 

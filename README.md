@@ -302,21 +302,56 @@ pip install reader-toolbox
 
 ---
 
-## PASO 4: Construir tu primer Carrel
+## PASO 4: Configuración adicional de Distant Reader
 
-Ahora viene la parte más importante: crear tu carrel.
+Antes de construir tu primer carrel, Distant Reader necesita descargar algunos modelos de lenguaje. Esto solo se hace **una vez**.
 
-### 4.1. Comando básico de construcción
+### 4.1. Instalar modelos de lenguaje
+
+La primera vez que intentes construir un carrel, Distant Reader te preguntará si quieres instalar los modelos de spaCy. Son necesarios para analizar el texto.
+
+**En Mac y Windows:**
+
+Simplemente ejecuta el siguiente comando y cuando te pregunte si quieres instalar los modelos, escribe `y` y presiona Enter:
+
+```bash
+python3 -m spacy download en_core_web_sm
+```
+
+**Nota:** Este proceso puede tardar 2-5 minutos dependiendo de tu conexión a Internet.
+
+Si trabajas con textos en español, también es recomendable instalar el modelo español:
+
+```bash
+python3 -m spacy download es_core_news_sm
+```
+
+**En Windows:** Si `python3` no funciona, intenta con `python`:
+
+```bash
+python -m spacy download en_core_web_sm
+```
+
+---
+
+## PASO 5: Construir tu primer Carrel
+
+Ahora sí, viene la parte más importante: crear tu carrel.
+
+**Nota importante:** Distant Reader usa el servidor Apache Tika para procesar archivos. Tika requiere Java, pero no te preocupes: en la mayoría de computadoras modernas Java ya está instalado. Si recibes un error sobre Java, descárgalo gratis desde [java.com](https://www.java.com/).
+
+### 5.1. Comando básico de construcción
 
 #### En Mac:
 
 Abre Terminal y escribe:
 
 ```bash
-rdr build mi-primer-carrel ~/Desktop/MiCorpus
+rdr build -s mi-primer-carrel ~/Desktop/MiCorpus
 ```
 
 Donde:
+- `-s` inicia el servidor Tika automáticamente (necesario para procesar archivos)
 - `mi-primer-carrel` es el nombre que le das a tu carrel (puedes cambiarlo)
 - `~/Desktop/MiCorpus` es la ruta a tu carpeta con archivos .txt
 
@@ -325,16 +360,19 @@ Donde:
 Abre CMD y escribe:
 
 ```bash
-rdr build mi-primer-carrel "C:\Users\TuNombre\Desktop\MiCorpus"
+rdr build -s mi-primer-carrel "C:\Users\TuNombre\Desktop\MiCorpus"
 ```
 
 Donde:
+- `-s` inicia el servidor Tika automáticamente
 - `mi-primer-carrel` es el nombre de tu carrel
 - `"C:\Users\TuNombre\Desktop\MiCorpus"` es la ruta a tu carpeta (pon las comillas si hay espacios)
 
+**IMPORTANTE:** Usa siempre la opción `-s` cuando construyas un carrel. Esto asegura que todos los componentes necesarios se inicien correctamente.
+
 ---
 
-### 4.2. Esperar a que se construya
+### 5.2. Esperar a que se construya
 
 El proceso puede tardar varios minutos dependiendo de cuántos documentos tengas. Verás mensajes en la pantalla mientras Distant Reader:
 
@@ -348,11 +386,11 @@ El proceso puede tardar varios minutos dependiendo de cuántos documentos tengas
 
 ---
 
-## PASO 5: Analizar tu Carrel
+## PASO 6: Analizar tu Carrel
 
 Una vez construido el carrel, puedes obtener información sobre él.
 
-### 5.1. Ver resumen del carrel
+### 6.1. Ver resumen del carrel
 
 #### En Mac y Windows:
 
@@ -364,7 +402,7 @@ Esto te mostrará estadísticas básicas: número de documentos, palabras totale
 
 ---
 
-### 5.2. Leer el carrel (ver archivos generados)
+### 6.2. Leer el carrel (ver archivos generados)
 
 ```bash
 rdr read mi-primer-carrel
@@ -374,7 +412,7 @@ Este comando abrirá la carpeta donde Distant Reader guardó todos los archivos 
 
 ---
 
-## PASO 6: Entender los resultados
+## PASO 7: Entender los resultados
 
 Después de construir tu carrel, Distant Reader crea una carpeta en:
 
@@ -407,7 +445,7 @@ Dentro encontrarás:
 
 ---
 
-## PASO 7: Comandos útiles adicionales
+## PASO 8: Comandos útiles adicionales
 
 ### Ver todos tus carrels creados:
 
@@ -415,10 +453,10 @@ Dentro encontrarás:
 rdr catalog
 ```
 
-### Ver la versión de Distant Reader instalada:
+### Ver información sobre Distant Reader (versión e información):
 
 ```bash
-rdr --version
+rdr about
 ```
 
 ### Ver ayuda general:
@@ -467,18 +505,22 @@ rdr --help
 pip install pdfminer.six
 pip install reader-toolbox
 
-# 2. Convertir PDFs a texto
+# 2. Instalar modelos de lenguaje (solo la primera vez)
+python3 -m spacy download en_core_web_sm
+python3 -m spacy download es_core_news_sm
+
+# 3. Convertir PDFs a texto
 for f in ~/Desktop/MiCorpus/*.pdf; do
   pdf2txt.py "$f" --outfile "${f%.pdf}.txt"
 done
 
-# 3. Construir carrel
-rdr build mi-primer-carrel ~/Desktop/MiCorpus
+# 4. Construir carrel (con -s para iniciar servidor Tika)
+rdr build -s mi-primer-carrel ~/Desktop/MiCorpus
 
-# 4. Ver resumen
+# 5. Ver resumen
 rdr summarize mi-primer-carrel
 
-# 5. Abrir carpeta con resultados
+# 6. Abrir carpeta con resultados
 rdr read mi-primer-carrel
 ```
 
@@ -491,24 +533,28 @@ conda activate reader-toolbox
 pip install pdfminer.six
 pip install reader-toolbox
 
-# 2. En sesiones futuras: activar el entorno
+# 2. Instalar modelos de lenguaje (solo la primera vez)
+python3 -m spacy download en_core_web_sm
+python3 -m spacy download es_core_news_sm
+
+# 3. En sesiones futuras: activar el entorno
 conda activate reader-toolbox
 
-# 3. Convertir PDFs a texto
+# 4. Convertir PDFs a texto
 for f in ~/Desktop/MiCorpus/*.pdf; do
   pdf2txt.py "$f" --outfile "${f%.pdf}.txt"
 done
 
-# 4. Construir carrel
-rdr build mi-primer-carrel ~/Desktop/MiCorpus
+# 5. Construir carrel (con -s para iniciar servidor Tika)
+rdr build -s mi-primer-carrel ~/Desktop/MiCorpus
 
-# 5. Ver resumen
+# 6. Ver resumen
 rdr summarize mi-primer-carrel
 
-# 6. Abrir carpeta con resultados
+# 7. Abrir carpeta con resultados
 rdr read mi-primer-carrel
 
-# 7. Cuando termines: desactivar el entorno
+# 8. Cuando termines: desactivar el entorno
 conda deactivate
 ```
 
@@ -519,18 +565,22 @@ conda deactivate
 pip install pdfminer.six
 pip install reader-toolbox
 
-# 2. Convertir PDFs a texto (en PowerShell)
+# 2. Instalar modelos de lenguaje (solo la primera vez, en CMD)
+python -m spacy download en_core_web_sm
+python -m spacy download es_core_news_sm
+
+# 3. Convertir PDFs a texto (en PowerShell)
 Get-ChildItem "C:\Users\TuNombre\Desktop\MiCorpus\*.pdf" | ForEach-Object {
   pdf2txt.py $_.FullName -o ($_.FullName -replace '\.pdf$', '.txt')
 }
 
-# 3. Construir carrel (en CMD)
-rdr build mi-primer-carrel "C:\Users\TuNombre\Desktop\MiCorpus"
+# 4. Construir carrel (en CMD, con -s para iniciar servidor Tika)
+rdr build -s mi-primer-carrel "C:\Users\TuNombre\Desktop\MiCorpus"
 
-# 4. Ver resumen
+# 5. Ver resumen
 rdr summarize mi-primer-carrel
 
-# 5. Abrir carpeta con resultados
+# 6. Abrir carpeta con resultados
 rdr read mi-primer-carrel
 ```
 
@@ -543,22 +593,26 @@ conda activate reader-toolbox
 pip install pdfminer.six
 pip install reader-toolbox
 
-# 2. En sesiones futuras: activar el entorno
+# 2. Instalar modelos de lenguaje (solo la primera vez)
+python -m spacy download en_core_web_sm
+python -m spacy download es_core_news_sm
+
+# 3. En sesiones futuras: activar el entorno
 conda activate reader-toolbox
 
-# 3. Convertir PDFs a texto
+# 4. Convertir PDFs a texto
 # (usa PowerShell o guarda los PDFs ya convertidos)
 
-# 4. Construir carrel
-rdr build mi-primer-carrel "C:\Users\TuNombre\Desktop\MiCorpus"
+# 5. Construir carrel (con -s para iniciar servidor Tika)
+rdr build -s mi-primer-carrel "C:\Users\TuNombre\Desktop\MiCorpus"
 
-# 5. Ver resumen
+# 6. Ver resumen
 rdr summarize mi-primer-carrel
 
-# 6. Abrir carpeta con resultados
+# 7. Abrir carpeta con resultados
 rdr read mi-primer-carrel
 
-# 7. Cuando termines: desactivar el entorno
+# 8. Cuando termines: desactivar el entorno
 conda deactivate
 ```
 
@@ -609,6 +663,26 @@ conda activate reader-toolbox
 - Verifica tu conexión a Internet
 - Intenta nuevamente (a veces los servidores están ocupados)
 - En Mac, intenta `pip3` en lugar de `pip`
+
+### Problema: Error "Language models not found" al construir carrel
+**Solución:** Necesitas instalar los modelos de spaCy:
+```bash
+python3 -m spacy download en_core_web_sm
+```
+En Windows usa `python` en lugar de `python3`
+
+### Problema: Error "Tika server is not running"
+**Solución:** Usa la opción `-s` al construir el carrel:
+```bash
+rdr build -s mi-primer-carrel ~/Desktop/MiCorpus
+```
+La opción `-s` inicia automáticamente el servidor Tika necesario para procesar los archivos.
+
+### Problema: El carrel se construye pero no aparecen resultados
+**Solución:**
+- Verifica que los archivos .txt tengan contenido (ábrelos y revisa que no estén vacíos)
+- Asegúrate de que los archivos estén en formato texto plano (.txt)
+- Verifica que instalaste los modelos de spaCy correctamente
 
 ---
 

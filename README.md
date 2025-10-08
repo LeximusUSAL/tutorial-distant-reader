@@ -281,23 +281,30 @@ pip install reader-toolbox
 - Tardará 2-3 minutos
 - Al final dirá: `Successfully installed reader-toolbox...`
 
-**⚠️ NUEVO ERROR CRÍTICO: Si ves "ValueError: numpy.dtype size changed" al ejecutar rdr build:**
+**⚠️ ERRORES CRÍTICOS al ejecutar `rdr build` (después de instalación):**
 
-Este error aparece cuando hay incompatibilidad entre versiones de numpy y pandas. **SOLUCIÓN:**
+**Error 1: "No module named numpy"** o **Error 2: "ValueError: numpy.dtype size changed"**
+
+Estos errores aparecen cuando intentas construir un carrel. **SOLUCIÓN:**
 
 ```bash
-# Desinstalar numpy y pandas actuales
+# Paso 1: Desinstalar numpy y pandas si existen
 pip uninstall numpy pandas -y
 
-# Reinstalar versiones compatibles
+# Paso 2: Reinstalar versiones compatibles con conda
 conda install -c conda-forge numpy pandas
 ```
 
 **Lo que verás:**
 - Preguntará: `Proceed ([y]/n)?`
 - Escribe `y` y presiona Enter
-- Tardará 1-2 minutos
+- Tardará 1-2 minutos instalando
 - Al final verás: `done`
+
+**Después de esto, vuelve a intentar construir tu carrel:**
+```bash
+rdr build prueba ~/Desktop/TXT
+```
 
 **Comando 5: Verificar**
 
@@ -539,23 +546,30 @@ pip install reader-toolbox
 - Vuelve atrás y ejecuta: `conda install -c conda-forge spacy`
 - Luego vuelve a intentar: `pip install reader-toolbox`
 
-**⚠️ NUEVO ERROR CRÍTICO: Si ves "ValueError: numpy.dtype size changed" al ejecutar rdr build:**
+**⚠️ ERRORES CRÍTICOS al ejecutar `rdr build` (después de instalación):**
 
-Este error aparece cuando hay incompatibilidad entre versiones de numpy y pandas. **SOLUCIÓN:**
+**Error 1: "No module named numpy"** o **Error 2: "ValueError: numpy.dtype size changed"**
+
+Estos errores aparecen cuando intentas construir un carrel. **SOLUCIÓN:**
 
 ```bash
-# Desinstalar numpy y pandas actuales
+# Paso 1: Desinstalar numpy y pandas si existen
 pip uninstall numpy pandas -y
 
-# Reinstalar versiones compatibles
+# Paso 2: Reinstalar versiones compatibles con conda
 conda install -c conda-forge numpy pandas
 ```
 
 **Lo que verás:**
 - Preguntará: `Proceed ([y]/n)?`
 - Escribe `y` y presiona Enter
-- Tardará 1-2 minutos
+- Tardará 1-2 minutos instalando
 - Al final verás: `done`
+
+**Después de esto, vuelve a intentar construir tu carrel:**
+```bash
+python -m rdr build prueba "C:\Users\User\Desktop\TXT"
+```
 
 **Comando 5: Verificar que todo funciona**
 

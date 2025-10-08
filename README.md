@@ -494,9 +494,34 @@ conda create -n reader-toolbox python=3.9
 conda activate reader-toolbox
 ```
 
-**Lo que verás:**
-- Al principio de la línea aparecerá `(reader-toolbox)` ← ¡Esto es buena señal!
+**Lo que DEBES ver:**
+- Al principio de la línea DEBE aparecer `(reader-toolbox)` ← ¡Esto es OBLIGATORIO!
 - Ejemplo: `(reader-toolbox) PS C:\Users\Maria>`
+
+**⚠️ SI NO APARECE `(reader-toolbox)`:**
+
+Esto significa que conda no está inicializado para PowerShell. Ejecuta:
+
+```powershell
+# Inicializar conda
+conda init powershell
+
+# Cerrar PowerShell completamente
+exit
+
+# Vuelve a abrir PowerShell
+
+# Ahora activa el entorno
+conda activate reader-toolbox
+
+# AHORA SÍ deberías ver: (reader-toolbox) PS C:\Users\User>
+```
+
+**Si aún no funciona, usa "Anaconda Prompt":**
+- Busca en el menú Windows: "Anaconda Prompt"
+- Ábrelo (en lugar de PowerShell)
+- Ejecuta: `conda activate reader-toolbox`
+- Ahí SÍ aparecerá: `(reader-toolbox)`
 
 **Comando 3: Instalar reader-toolbox**
 ```bash
@@ -566,12 +591,31 @@ conda deactivate
 - Vuelve a instalar siguiendo EXACTAMENTE los pasos del PASO 2
 - **Crucial:** Marca "Add to PATH" en la pantalla 5
 
-**Problema 3: "conda activate" no funciona**
+**Problema 3: "conda activate" funciona pero NO aparece (reader-toolbox)**
+
+**Esto es el problema más común.** Ejecutas `conda activate reader-toolbox` pero el prompt NO cambia.
+
+**Causa:** Conda no está inicializado para PowerShell.
 
 **Solución:**
-- Cierra y vuelve a abrir PowerShell/Anaconda Prompt
-- Si persiste, reinicia la computadora
-- Usa "Anaconda Prompt" del menú de Windows
+```powershell
+# Inicializar conda para PowerShell
+conda init powershell
+
+# Cerrar PowerShell completamente (Ctrl+D o escribe exit)
+exit
+
+# Vuelve a abrir PowerShell
+
+# Ahora activa el entorno
+conda activate reader-toolbox
+
+# AHORA SÍ deberías ver: (reader-toolbox) PS C:\Users\User>
+```
+
+**Alternativa más fácil:**
+- Usa "Anaconda Prompt" del menú de Windows en lugar de PowerShell
+- Anaconda Prompt ya está configurado correctamente
 
 **Problema 4: Error "rdr : No se encuentra la unidad"**
 

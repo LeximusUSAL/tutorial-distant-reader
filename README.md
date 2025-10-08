@@ -248,42 +248,111 @@ conda deactivate
 
 ### 3.2. Instalación en Windows
 
-En Windows, la instalación directa con pip suele funcionar perfectamente sin necesidad de entornos virtuales.
+**IMPORTANTE PARA WINDOWS:** En Windows, la instalación con Conda es **ALTAMENTE RECOMENDADA** porque evita problemas de compilación de pandas y otras dependencias. La instalación directa con pip puede fallar o tardar mucho tiempo.
 
-**Paso 1: Abrir la línea de comandos**
+#### Opción A: Instalación con Conda (RECOMENDADA para Windows)
+
+**Paso 1: Instalar Miniconda (solo la primera vez)**
+
+1. Descarga Miniconda para Windows desde: https://docs.conda.io/en/latest/miniconda.html
+2. Descarga el instalador `.exe` para Windows
+3. Ejecuta el instalador y sigue las instrucciones
+4. **IMPORTANTE:** Durante la instalación, marca la opción "Add Miniconda to PATH" si aparece
+5. Completa la instalación
+
+**Paso 2: Abrir Anaconda Prompt**
 
 1. Presiona la tecla Windows
-2. Escribe "CMD" o "Símbolo del sistema"
-3. Presiona Enter
+2. Busca "Anaconda Prompt" (se instaló con Miniconda)
+3. Ábrelo (NO uses CMD normal, usa Anaconda Prompt)
 
-**Paso 2: Instalar reader-toolbox**
+**Paso 3: Crear entorno e instalar reader-toolbox**
 
-Escribe este comando y presiona Enter:
+Ejecuta estos comandos uno por uno en Anaconda Prompt:
 
 ```bash
+# Crear entorno con Python 3.9
+conda create -n reader-toolbox python=3.9
+
+# Cuando pregunte, escribe 'y' y presiona Enter
+
+# Activar el entorno
+conda activate reader-toolbox
+
+# Instalar reader-toolbox
 pip install reader-toolbox
 ```
 
-Espera a que termine la instalación (puede tardar 1-2 minutos).
-
-**Paso 3: Verificar la instalación**
-
-Escribe:
+**Paso 4: Verificar la instalación**
 
 ```bash
 rdr --help
 ```
 
-Deberías ver un mensaje de ayuda con la lista de comandos disponibles.
+Deberías ver un mensaje de ayuda con la lista de comandos.
 
-**Nota:** Si recibes un error diciendo que `pip` no se encuentra, primero necesitas instalar Python:
+**Para usar Distant Reader en el futuro:**
+1. Abre "Anaconda Prompt"
+2. Ejecuta: `conda activate reader-toolbox`
+3. Ya puedes usar todos los comandos `rdr`
 
-1. Ve a [python.org/downloads](https://www.python.org/downloads/)
-2. Descarga Python 3 (la última versión)
-3. Durante la instalación, **MARCA la casilla "Add Python to PATH"** (esto es muy importante)
-4. Completa la instalación
-5. Cierra y vuelve a abrir CMD
-6. Intenta nuevamente `pip install reader-toolbox`
+---
+
+#### Opción B: Instalación directa con pip (más lenta pero funciona)
+
+**⏱️ NOTA:** Esta opción funciona correctamente pero tarda **10-20 minutos** en Windows porque pandas necesita compilarse desde el código fuente. Si tienes prisa, usa la Opción A con Conda (2-3 minutos).
+
+**Paso 1: Abrir PowerShell como Administrador**
+
+1. Presiona la tecla Windows
+2. Escribe "PowerShell"
+3. Click derecho en "Windows PowerShell"
+4. Selecciona "Ejecutar como administrador"
+
+**Paso 2: Instalar reader-toolbox**
+
+```bash
+pip install reader-toolbox
+```
+
+**IMPORTANTE:** La instalación tardará 10-20 minutos. Durante este tiempo verás:
+- `Collecting reader-toolbox` (rápido)
+- `Collecting pandas<=1.5.2` (rápido)
+- `Getting requirements to build wheel ...` ← **Aquí tardará 10-20 minutos** (¡es normal!)
+- Después continuará con el resto de paquetes
+
+**Paso 3: Verificar la instalación**
+
+Una vez que termine (verás `Successfully installed reader-toolbox...`), verifica:
+
+```bash
+rdr --help
+```
+
+**Si la instalación parece congelada:**
+
+Si ves este mensaje durante varios minutos:
+```
+Getting requirements to build wheel ... -
+```
+
+**¡NO te preocupes! Es normal.** Pandas se está compilando desde el código fuente, lo cual puede tardar **10-20 minutos en Windows**. Ten paciencia y espera a que termine.
+
+**Solo cancela (Ctrl+C) si:**
+- Han pasado más de 30 minutos sin progreso
+- Recibes mensajes de error
+- Prefieres usar Conda (Opción A) que es más rápido (2-3 minutos)
+
+**Nota sobre errores comunes en Windows:**
+
+1. **"pip: command not found"**
+   - Instala Python desde [python.org/downloads](https://www.python.org/downloads/)
+   - Durante la instalación, **MARCA "Add Python to PATH"**
+   - Reinicia CMD después de instalar
+
+2. **"error: Microsoft Visual C++ 14.0 is required"**
+   - Esto significa que pip intenta compilar paquetes
+   - **Solución: Usa Conda (Opción A)** en lugar de pip
 
 **Instalación alternativa en Windows con Conda (opcional)**
 
@@ -469,15 +538,20 @@ rdr --help
 
 ## Consejos para principiantes
 
-### 1. **Nombres de archivos**
+### 1. **Paciencia con la instalación en Windows**
+- La primera instalación con pip puede tardar 10-20 minutos (es normal)
+- No canceles si ves "Getting requirements to build wheel" durante varios minutos
+- Si tienes prisa, usa Conda (Opción A) que es mucho más rápido
+
+### 2. **Nombres de archivos**
 - No uses espacios en los nombres de tus archivos PDF o carpetas
 - En lugar de `Mi Corpus.pdf`, usa `MiCorpus.pdf` o `mi_corpus.pdf`
 
-### 2. **Rutas de carpetas**
+### 3. **Rutas de carpetas**
 - Si la ruta tiene espacios, ponla entre comillas: `"C:\Mis Documentos\Corpus"`
 - Mejor evita espacios completamente
 
-### 3. **Errores comunes**
+### 4. **Errores comunes**
 
 **Error: "pip: command not found"**
 - Solución: Instala Python desde [python.org](https://www.python.org/downloads/)
@@ -489,7 +563,7 @@ rdr --help
 - Verifica que la carpeta contenga archivos .txt válidos
 - Asegúrate de que los archivos no estén vacíos
 
-### 4. **Optimización**
+### 5. **Optimización**
 - Para mejores resultados, usa textos en inglés o español
 - Asegúrate de que tus PDFs sean digitales (no imágenes escaneadas)
 - Si tienes PDFs escaneados, necesitarás usar OCR primero

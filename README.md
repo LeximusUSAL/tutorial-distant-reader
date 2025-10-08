@@ -171,72 +171,171 @@ Conda es un gestor de "entornos virtuales" que mantiene tus proyectos organizado
 - Te permite tener múltiples versiones de herramientas instaladas sin problemas
 - Es la forma profesional de gestionar proyectos de programación
 
-**Paso 1: Instalar Conda (solo la primera vez)**
+---
 
-Si no tienes Conda instalado:
+### **PASO 1: Descargar Miniconda para Mac**
 
-1. Descarga Miniconda (versión ligera de Conda) desde: https://docs.conda.io/en/latest/miniconda.html
+1. **Abre tu navegador web** (Safari, Chrome, Firefox)
 
-2. Descarga el instalador para macOS y ejecútalo
+2. **Descarga el instalador correcto según tu Mac:**
 
-3. Sigue las instrucciones en pantalla (acepta las opciones por defecto)
+   **Si tienes Mac con chip M1/M2/M3 (Apple Silicon):**
+   - Ve a: https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.pkg
+   - Se descargará `Miniconda3-latest-MacOSX-arm64.pkg` (60 MB aprox.)
 
-4. Cierra y vuelve a abrir Terminal
+   **Si tienes Mac Intel (anterior a 2020):**
+   - Ve a: https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.pkg
+   - Se descargará `Miniconda3-latest-MacOSX-x86_64.pkg` (70 MB aprox.)
 
-**Paso 2: Crear un entorno para Distant Reader**
+   **¿No sabes qué Mac tienes?**
+   - Haz clic en el menú  (Apple) en la esquina superior izquierda
+   - Selecciona "Acerca de este Mac"
+   - Si dice "Chip Apple M1/M2/M3" → usa ARM64
+   - Si dice "Procesador Intel" → usa x86_64
 
-Abre Terminal y ejecuta estos comandos uno por uno:
+3. **Espera a que termine la descarga** (verás el archivo en tu carpeta de Descargas)
 
+---
+
+### **PASO 2: Instalar Miniconda en Mac**
+
+1. **Abre tu carpeta de Descargas**
+   - Haz clic en el Finder
+   - Ve a Descargas
+
+2. **Busca el archivo descargado:**
+   - `Miniconda3-latest-MacOSX-arm64.pkg` o
+   - `Miniconda3-latest-MacOSX-x86_64.pkg`
+
+3. **Haz doble clic en el archivo .pkg**
+
+4. **Pantalla 1: Introducción**
+   - Haz clic en "Continuar"
+
+5. **Pantalla 2: Léeme**
+   - Haz clic en "Continuar"
+
+6. **Pantalla 3: Licencia**
+   - Haz clic en "Continuar"
+   - Luego haz clic en "Aceptar"
+
+7. **Pantalla 4: Tipo de instalación**
+   - **Deja "Instalar para mí únicamente"** (opción por defecto)
+   - Haz clic en "Instalar"
+
+8. **Introduce tu contraseña de Mac**
+   - Escribe tu contraseña (la que usas para encender el Mac)
+   - Haz clic en "Instalar software"
+
+9. **Espera 2-3 minutos** mientras se instala
+
+10. **Pantalla final: Resumen**
+    - Haz clic en "Cerrar"
+
+11. **IMPORTANTE: Reinicia Terminal**
+    - Si tienes Terminal abierta, ciérrala completamente
+    - Abre Terminal de nuevo (búscala con Spotlight: Cmd + Espacio)
+
+---
+
+### **PASO 3: Verificar que Miniconda se instaló correctamente**
+
+1. **Abre Terminal:**
+   - Presiona `Cmd + Espacio`
+   - Escribe "Terminal"
+   - Presiona Enter
+
+2. **Escribe este comando y presiona Enter:**
+   ```bash
+   conda --version
+   ```
+
+3. **Si ves algo como `conda 24.x.x`** → ✅ ¡Perfecto! Continúa al PASO 4
+
+4. **Si ves `zsh: command not found: conda`:**
+
+   **Solución (ejecuta estos comandos uno por uno):**
+   ```bash
+   # Para zsh (Terminal por defecto en Mac modernas)
+   echo 'export PATH="$HOME/miniconda3/bin:$PATH"' >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
+   **O si usas bash (Macs antiguas):**
+   ```bash
+   echo 'export PATH="$HOME/miniconda3/bin:$PATH"' >> ~/.bash_profile
+   source ~/.bash_profile
+   ```
+
+   Luego vuelve a probar: `conda --version`
+
+---
+
+### **PASO 4: Crear entorno e instalar Distant Reader**
+
+**En Terminal, ejecuta estos comandos UNO POR UNO:**
+
+**Comando 1: Crear el entorno**
 ```bash
-# Crear un entorno nuevo llamado "reader-toolbox" con Python 3.9
 conda create -n reader-toolbox python=3.9
 ```
 
-Te preguntará si quieres continuar, escribe `y` y presiona Enter.
+**Lo que verás:**
+- Aparecerá una lista de paquetes
+- Al final dirá: `Proceed ([y]/n)?`
+- **Escribe `y` y presiona Enter**
+- Espera 1-2 minutos
 
+**Comando 2: Activar el entorno**
 ```bash
-# Activar el entorno (esto es importante)
 conda activate reader-toolbox
 ```
 
-Verás que el prompt de tu terminal cambia y ahora muestra `(reader-toolbox)` al principio. Esto significa que estás dentro del entorno.
+**Lo que verás:**
+- Al principio de la línea aparecerá `(reader-toolbox)` ← ¡Esto es buena señal!
+- Ejemplo: `(reader-toolbox) maria@MacBook ~ %`
 
+**Comando 3: Instalar reader-toolbox**
 ```bash
-# Instalar reader-toolbox dentro del entorno
 pip install reader-toolbox
 ```
 
-**Paso 3: Verificar la instalación**
+**Lo que verás:**
+- Empezará a descargar paquetes
+- Tardará 2-3 minutos
+- Al final dirá: `Successfully installed reader-toolbox...`
 
+**Comando 4: Verificar**
 ```bash
 rdr --help
 ```
 
-Deberías ver el mensaje de ayuda.
+**Lo que verás:**
+- Una lista de comandos disponibles
+- Si ves esto, ¡TODO FUNCIONÓ! ✅
 
-**¿Cómo usar Conda cada vez que trabajes con Distant Reader?**
+---
 
-**Cada vez que abras Terminal** y quieras usar Distant Reader, necesitas activar el entorno:
+### **PASO 5: Cómo usar Distant Reader cada vez que trabajes**
 
-```bash
-conda activate reader-toolbox
-```
+**Cada vez que quieras usar Distant Reader:**
 
-Ahora puedes usar todos los comandos de Distant Reader (`rdr build`, `rdr summarize`, etc.)
+1. Abre Terminal
+2. Ejecuta: `conda activate reader-toolbox`
+3. Verás `(reader-toolbox)` al inicio de la línea
+4. Ya puedes usar comandos como `rdr build`, `rdr summarize`, etc.
 
-**Cuando termines tu trabajo**, desactiva el entorno:
-
+**Para salir del entorno:**
 ```bash
 conda deactivate
 ```
 
-**Resumen del flujo de trabajo con Conda:**
-
+**Resumen del flujo de trabajo:**
 ```bash
-# Al empezar tu sesión de trabajo:
+# Al empezar:
 conda activate reader-toolbox
 
-# Trabajar con Distant Reader normalmente:
+# Trabajar normalmente:
 rdr build mi-carrel ~/Desktop/MiCorpus
 rdr summarize mi-carrel
 
@@ -246,55 +345,210 @@ conda deactivate
 
 ---
 
+### **Solución de problemas en Mac:**
+
+**Problema 1: "conda: command not found"**
+
+**Solución:**
+```bash
+# Añade conda al PATH
+echo 'export PATH="$HOME/miniconda3/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+# Verifica
+conda --version
+```
+
+**Problema 2: "conda activate" no funciona**
+
+**Solución:**
+```bash
+# Inicializa conda para tu shell
+conda init zsh  # o "conda init bash" si usas bash
+# Cierra y vuelve a abrir Terminal
+conda activate reader-toolbox
+```
+
+**Problema 3: Error de permisos durante instalación**
+
+**Solución:**
+- Asegúrate de elegir "Instalar para mí únicamente" en el instalador
+- No uses `sudo` con conda
+- Reinstala si es necesario
+
+---
+
 ### 3.2. Instalación en Windows
 
 **IMPORTANTE PARA WINDOWS:** En Windows, la instalación con Conda es **OBLIGATORIA para la mayoría de usuarios** porque evita errores de compilación de paquetes C++ (cymem, murmurhash, pandas). La instalación directa con pip requiere instalar Visual C++ Build Tools (7 GB, 30-45 minutos) y puede fallar.
 
-#### Opción A: Instalación con Conda (RECOMENDADA para Windows)
+#### Opción A: Instalación con Conda (RECOMENDADA - 100% de éxito)
 
-**Paso 1: Instalar Miniconda (solo la primera vez)**
+### **PASO 1: Descargar Miniconda**
 
-1. Descarga Miniconda para Windows desde: https://docs.conda.io/en/latest/miniconda.html
-2. Descarga el instalador `.exe` para Windows
-3. Ejecuta el instalador y sigue las instrucciones
-4. **IMPORTANTE:** Durante la instalación, marca la opción "Add Miniconda to PATH" si aparece
-5. Completa la instalación
+**En Windows:**
 
-**Paso 2: Abrir Anaconda Prompt**
+1. Abre tu navegador web (Chrome, Edge, Firefox)
+2. Ve a esta dirección EXACTA: https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
+3. Se descargará un archivo llamado `Miniconda3-latest-Windows-x86_64.exe` (aproximadamente 90 MB)
+4. Espera a que termine la descarga (verás el archivo en tu carpeta de Descargas)
 
-1. Presiona la tecla Windows
-2. Busca "Anaconda Prompt" (se instaló con Miniconda)
-3. Ábrelo (NO uses CMD normal, usa Anaconda Prompt)
+**Alternativa si el enlace directo no funciona:**
+1. Ve a: https://docs.conda.io/en/latest/miniconda.html
+2. Busca la sección "Latest Miniconda installer links"
+3. Haz clic en "Miniconda3 Windows 64-bit" (el archivo .exe)
 
-**Paso 3: Crear entorno e instalar reader-toolbox**
+---
 
-Ejecuta estos comandos uno por uno en Anaconda Prompt:
+### **PASO 2: Instalar Miniconda en Windows**
 
+**Muy importante: Lee CADA pantalla cuidadosamente**
+
+1. **Busca el archivo descargado:**
+   - Abre tu carpeta de Descargas
+   - Busca `Miniconda3-latest-Windows-x86_64.exe`
+   - Haz doble clic en él
+
+2. **Pantalla 1: Welcome**
+   - Haz clic en "Next" (Siguiente)
+
+3. **Pantalla 2: License Agreement**
+   - Haz clic en "I Agree" (Acepto)
+
+4. **Pantalla 3: Select Installation Type**
+   - **IMPORTANTE:** Selecciona "Just Me (recommended)"
+   - Haz clic en "Next"
+
+5. **Pantalla 4: Choose Install Location**
+   - **Deja la ruta por defecto** (algo como `C:\Users\TuNombre\miniconda3`)
+   - **NO cambies nada aquí**
+   - Haz clic en "Next"
+
+6. **Pantalla 5: Advanced Installation Options** ← **LA MÁS IMPORTANTE**
+   - ✅ **MARCA la casilla:** "Add Miniconda3 to my PATH environment variable"
+   - ⚠️ Aparecerá un mensaje en rojo diciendo "Not recommended" - **IGNÓRALO**
+   - ✅ **MARCA también:** "Register Miniconda3 as my default Python 3.x"
+   - Haz clic en "Install"
+
+7. **Pantalla 6: Installing**
+   - Espera 2-3 minutos mientras se instala
+   - Verás una barra de progreso
+
+8. **Pantalla 7: Completing**
+   - **DESMARCA** las casillas de "Learn more about Anaconda Cloud"
+   - Haz clic en "Finish"
+
+9. **Reinicia tu computadora** (opcional pero recomendado)
+
+---
+
+### **PASO 3: Verificar que Miniconda se instaló correctamente**
+
+1. **Abre PowerShell:**
+   - Presiona la tecla Windows
+   - Escribe "PowerShell"
+   - Presiona Enter
+
+2. **Escribe este comando y presiona Enter:**
+   ```bash
+   conda --version
+   ```
+
+3. **Si ves algo como `conda 24.x.x`** → ✅ ¡Perfecto! Continúa al PASO 4
+
+4. **Si ves `conda: command not found` o error:**
+   - Cierra PowerShell
+   - Busca en el menú de Windows: "Anaconda Prompt" o "Anaconda PowerShell Prompt"
+   - Abre esa aplicación
+   - Vuelve a probar `conda --version`
+   - Si funciona, usa siempre "Anaconda Prompt" en lugar de PowerShell normal
+
+---
+
+### **PASO 4: Crear entorno e instalar Distant Reader**
+
+**Abre PowerShell (o Anaconda Prompt si PowerShell no funcionó)**
+
+**Comando 1: Crear el entorno**
 ```bash
-# Crear entorno con Python 3.9
 conda create -n reader-toolbox python=3.9
+```
 
-# Cuando pregunte, escribe 'y' y presiona Enter
+**Lo que verás:**
+- Aparecerá una lista de paquetes a instalar
+- Al final dirá: `Proceed ([y]/n)?`
+- **Escribe `y` y presiona Enter**
+- Espera 1-2 minutos
 
-# Activar el entorno
+**Comando 2: Activar el entorno**
+```bash
 conda activate reader-toolbox
+```
 
-# Instalar reader-toolbox
+**Lo que verás:**
+- Al principio de la línea aparecerá `(reader-toolbox)` ← ¡Esto es buena señal!
+- Ejemplo: `(reader-toolbox) PS C:\Users\Maria>`
+
+**Comando 3: Instalar reader-toolbox**
+```bash
 pip install reader-toolbox
 ```
 
-**Paso 4: Verificar la instalación**
+**Lo que verás:**
+- Empezará a descargar paquetes
+- Tardará 2-3 minutos
+- Al final dirá: `Successfully installed reader-toolbox...`
 
+**Comando 4: Verificar**
 ```bash
 rdr --help
 ```
 
-Deberías ver un mensaje de ayuda con la lista de comandos.
+**Lo que verás:**
+- Una lista de comandos disponibles
+- Si ves esto, ¡TODO FUNCIONÓ! ✅
 
-**Para usar Distant Reader en el futuro:**
-1. Abre "Anaconda Prompt"
+---
+
+### **PASO 5: Cómo usar Distant Reader cada vez que trabajes**
+
+**Cada vez que quieras usar Distant Reader:**
+
+1. Abre PowerShell (o Anaconda Prompt)
 2. Ejecuta: `conda activate reader-toolbox`
-3. Ya puedes usar todos los comandos `rdr`
+3. Verás `(reader-toolbox)` al inicio de la línea
+4. Ya puedes usar comandos como `rdr build`, `rdr summarize`, etc.
+
+**Para salir del entorno:**
+```bash
+conda deactivate
+```
+
+---
+
+### **Solución de problemas en Windows:**
+
+**Problema 1: "conda: command not found" en PowerShell**
+
+**Solución:**
+- Busca en el menú Windows: "Anaconda Prompt"
+- Usa siempre "Anaconda Prompt" en lugar de PowerShell normal
+- O reinstala Miniconda y asegúrate de marcar "Add to PATH"
+
+**Problema 2: Error durante instalación de Miniconda**
+
+**Solución:**
+- Desinstala Miniconda desde Panel de Control → Programas
+- Descarga de nuevo el instalador
+- Vuelve a instalar siguiendo EXACTAMENTE los pasos del PASO 2
+- **Crucial:** Marca "Add to PATH" en la pantalla 5
+
+**Problema 3: "conda activate" no funciona**
+
+**Solución:**
+- Cierra y vuelve a abrir PowerShell/Anaconda Prompt
+- Si persiste, reinicia la computadora
+- Usa "Anaconda Prompt" del menú de Windows
 
 ---
 

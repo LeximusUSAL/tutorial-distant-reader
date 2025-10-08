@@ -686,9 +686,239 @@ La opción `-s` inicia automáticamente el servidor Tika necesario para procesar
 
 ---
 
-## Siguiente nivel: Procesamiento de textos en español
+## Siguiente nivel: Procesamiento avanzado de textos en español
 
-Para análisis avanzados de textos en español (como los del proyecto LexiMus), puedes crear scripts personalizados que se integren con Distant Reader. Consulta el archivo `spanish-distant-reader.py` disponible en plataformas educativas como Studium.
+### Opción A: Usar Distant Reader estándar con tus textos en español
+
+Los pasos anteriores (PASOS 1-8) funcionan perfectamente para textos en español. Solo necesitas:
+- Instalar el modelo español de spaCy: `python3 -m spacy download es_core_news_sm`
+- Construir tu carrel normalmente con `rdr build -s`
+
+### Opción B: Usar el script especializado para español (Spanish Distant Reader)
+
+Para análisis más avanzados de textos en español (como los del proyecto LexiMus), existe un **script especializado** que:
+
+- ✅ **Filtra automáticamente 610 palabras vacías** del español (de, la, el, que, en, etc.)
+- ✅ **Optimiza el análisis morfológico** para español (sustantivos, verbos, adjetivos)
+- ✅ **Identifica entidades culturales** españolas (escritores, compositores, lugares)
+- ✅ **Genera visualizaciones avanzadas** (nubes de palabras, gráficos de frecuencia)
+- ✅ **Crea base de datos SQLite** con todo el contenido filtrado
+
+---
+
+## PASO 9 (OPCIONAL): Usar Spanish Distant Reader para análisis avanzado
+
+### 9.1. Descargar el script español
+
+El script `spanish-distant-reader.py` está disponible en tu sistema o puedes descargarlo de plataformas educativas como Studium.
+
+**Archivos necesarios:**
+- `spanish-distant-reader.py` - El script principal
+- `README.md` - Documentación completa
+- `EXAMPLES.md` - Ejemplos de uso
+- `install.sh` - Script de instalación automática
+
+### 9.2. Instalar dependencias adicionales
+
+El script español necesita dos bibliotecas adicionales:
+
+**En Mac:**
+```bash
+pip install matplotlib wordcloud
+```
+
+**En Windows:**
+```bash
+pip install matplotlib wordcloud
+```
+
+**Con Conda (Mac y Windows):**
+```bash
+conda activate reader-toolbox
+pip install matplotlib wordcloud
+```
+
+**Instalación automática (solo Mac/Linux):**
+```bash
+cd ~/Desktop/spanish-distant-reader/
+bash install.sh
+```
+
+### 9.3. Uso básico del script español
+
+#### Sintaxis:
+```bash
+python3 spanish-distant-reader.py <nombre-del-carrel> <carpeta-con-textos>
+```
+
+#### Ejemplos prácticos:
+
+**En Mac:**
+```bash
+# Analizar corpus de textos literarios
+python3 spanish-distant-reader.py mi-corpus-literario ~/Desktop/MiCorpus/
+
+# Analizar revistas musicales
+python3 spanish-distant-reader.py revistas-musicales ~/Desktop/RevistasMusica/
+
+# Analizar periódicos históricos
+python3 spanish-distant-reader.py periodicos-1900 ~/Desktop/Periodicos/
+```
+
+**En Windows:**
+```bash
+# Analizar corpus de textos
+python spanish-distant-reader.py mi-corpus "C:\Users\TuNombre\Desktop\MiCorpus"
+
+# Analizar revistas
+python spanish-distant-reader.py revistas "C:\Users\TuNombre\Desktop\Revistas"
+```
+
+### 9.4. Resultados generados
+
+El script crea una carpeta con tu carrel que contiene:
+
+**Archivos principales:**
+- `index.htm` - Interfaz web profesional (estilo Distant Reader)
+- `index.json` - Datos estructurados en formato JSON
+- `index.txt` - Bibliografía en texto plano
+- `index.xhtml` - Bibliografía en HTML
+
+**Carpeta `figures/` con visualizaciones:**
+- `unigrams-cloud.png` - Nube de palabras frecuentes
+- `bigrams-cloud.png` - Nube de frases de dos palabras
+- `keywords-cloud.png` - Nube de palabras clave generales
+- `pos-noun.png` - Sustantivos más frecuentes
+- `pos-verb.png` - Verbos más frecuentes
+- `pos-adjective.png` - Adjetivos más frecuentes
+- `pos-adverb.png` - Adverbios más frecuentes
+- `entities-person.png` - Personas mencionadas (escritores, compositores)
+- `entities-gpe.png` - Lugares (ciudades, países)
+- `entities-org.png` - Organizaciones
+- `sizes-histogram.png` - Distribución de tamaños de archivo
+- `readability-histogram.png` - Distribución de legibilidad
+
+**Carpeta `etc/`:**
+- `stopwords.txt` - Lista de 610 palabras vacías filtradas
+- `carrel.db` - Base de datos SQLite con todo el análisis
+
+### 9.5. Ejemplos de uso académico
+
+#### Ejemplo 1: Análisis de obras literarias
+```bash
+# Analizar las obras completas de Federico García Lorca
+python3 spanish-distant-reader.py lorca-completo ~/Desktop/Lorca-Textos/
+
+# Resultados esperados:
+# Palabras clave: sangre, luna, muerte, verde, gitano, caballo
+# Entidades: Granada, Andalucía, Nueva York
+# Temas: simbolismo del color, imágenes de la naturaleza
+```
+
+#### Ejemplo 2: Revistas musicales españolas
+```bash
+# Analizar revistas de música de principios del siglo XX
+python3 spanish-distant-reader.py revistas-musicales-1900 ~/Desktop/RevistasMusicales/
+
+# Resultados esperados:
+# Términos: música, concierto, orquesta, compositor, teatro, ópera
+# Compositores: Falla, Albéniz, Granados, Debussy, Wagner
+# Lugares: Teatro Real, Conservatorio, Ateneo
+```
+
+#### Ejemplo 3: Prensa histórica
+```bash
+# Analizar periódicos de la Guerra Civil
+python3 spanish-distant-reader.py prensa-guerra-civil ~/Desktop/Periodicos-1936-39/
+
+# Resultados esperados:
+# Vocabulario político y militar
+# Entidades: Franco, República, Madrid, Barcelona
+# Términos: fascista, republicano, frente, milicia
+```
+
+### 9.6. Ventajas del script español vs. Distant Reader estándar
+
+| Característica | Distant Reader estándar | Spanish Distant Reader |
+|----------------|------------------------|------------------------|
+| Idioma optimizado | Inglés | **Español** |
+| Filtrado de palabras vacías | Inglés (a, the, is) | **610 palabras en español** |
+| Análisis morfológico | Inglés | **Patrones españoles** |
+| Entidades culturales | Genérico | **Figuras españolas/latinoamericanas** |
+| Visualizaciones | Estándar | **Optimizadas para español** |
+| Base de datos | Estándar | **Contenido pre-filtrado** |
+| Interfaz web | Estándar | **Estilo Distant Reader** |
+
+### 9.7. Consultar la base de datos SQLite
+
+Puedes hacer consultas avanzadas a la base de datos:
+
+```bash
+# Abrir la base de datos
+sqlite3 mi-corpus/etc/carrel.db
+
+# Consultas SQL de ejemplo:
+
+# Ver los 20 sustantivos más frecuentes
+SELECT word, frequency FROM wrd
+WHERE word IN (SELECT word FROM pos WHERE pos = 'noun')
+ORDER BY frequency DESC LIMIT 20;
+
+# Ver personas mencionadas
+SELECT entity, frequency FROM ent
+WHERE type = 'persons'
+ORDER BY frequency DESC;
+
+# Ver archivos por legibilidad
+SELECT filename, readability FROM bib
+ORDER BY readability DESC;
+```
+
+### 9.8. Comparar múltiples corpus
+
+Puedes crear varios carrels y compararlos:
+
+```bash
+# Crear tres carrels diferentes
+python3 spanish-distant-reader.py lorca-obras ~/Desktop/Lorca/
+python3 spanish-distant-reader.py machado-obras ~/Desktop/Machado/
+python3 spanish-distant-reader.py alberti-obras ~/Desktop/Alberti/
+
+# Luego compara los archivos index.json de cada uno
+# Analiza diferencias en vocabulario, temas y estilo
+```
+
+### 9.9. Solución de problemas del script español
+
+#### Problema: "No module named 'matplotlib'"
+**Solución:**
+```bash
+pip install matplotlib wordcloud
+```
+
+#### Problema: "No module named 'wordcloud'"
+**Solución:**
+```bash
+pip install wordcloud
+```
+
+#### Problema: Archivos vacíos o sin resultados
+**Solución:**
+- Verifica que los archivos sean .txt en codificación UTF-8
+- Asegúrate de que los archivos contienen texto en español
+- Revisa que no haya caracteres especiales en nombres de archivo
+
+#### Problema: Error de encoding
+**Solución en Mac:**
+```bash
+# Convertir archivos a UTF-8
+iconv -f ISO-8859-1 -t UTF-8 archivo.txt > archivo_utf8.txt
+```
+
+**Solución en Windows:**
+- Abre el archivo en Notepad++
+- Ve a "Encoding" → "Convert to UTF-8"
+- Guarda el archivo
 
 ---
 

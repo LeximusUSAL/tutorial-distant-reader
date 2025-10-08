@@ -1237,7 +1237,7 @@ Para análisis más avanzados de textos en español (como los del proyecto LexiM
 
 ### 9.1. Descargar el script español
 
-El script `spanish-distant-reader.py` está disponible en tu sistema o puedes descargarlo de plataformas educativas como Studium.
+El script `spanish-distant-reader.py` está disponible en tu sistema o puedes descargarlo de plataformas educativas (solo para estudiantes del máster en Música Hispana - USAL).
 
 **Archivos necesarios:**
 - `spanish-distant-reader.py` - El script principal
@@ -1453,6 +1453,6 @@ iconv -f ISO-8859-1 -t UTF-8 archivo.txt > archivo_utf8.txt
 
 ---
 
-**Creado por:** María (Universidad de Salamanca)
+**Creado por:** María Palacios Nieto mpalacios@usal.es (Universidad de Salamanca)
 **Proyecto:** LexiMus - Léxico y ontología de la música en español
 **Licencia:** Creative Commons CC-BY 4.0

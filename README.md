@@ -248,7 +248,7 @@ conda deactivate
 
 ### 3.2. Instalación en Windows
 
-**IMPORTANTE PARA WINDOWS:** En Windows, la instalación con Conda es **ALTAMENTE RECOMENDADA** porque evita problemas de compilación de pandas y otras dependencias. La instalación directa con pip puede fallar o tardar mucho tiempo.
+**IMPORTANTE PARA WINDOWS:** En Windows, la instalación con Conda es **OBLIGATORIA para la mayoría de usuarios** porque evita errores de compilación de paquetes C++ (cymem, murmurhash, pandas). La instalación directa con pip requiere instalar Visual C++ Build Tools (7 GB, 30-45 minutos) y puede fallar.
 
 #### Opción A: Instalación con Conda (RECOMENDADA para Windows)
 
@@ -298,76 +298,57 @@ Deberías ver un mensaje de ayuda con la lista de comandos.
 
 ---
 
-#### Opción B: Instalación directa con pip (más lenta pero funciona)
+#### Opción B: Instalación con pip + Visual C++ Build Tools (solo usuarios avanzados)
 
-**⏱️ NOTA:** Esta opción funciona correctamente pero tarda **10-20 minutos** en Windows porque pandas necesita compilarse desde el código fuente. Si tienes prisa, usa la Opción A con Conda (2-3 minutos).
+**⚠️ ADVERTENCIA:** Esta opción requiere instalar Microsoft Visual C++ Build Tools (7 GB, 30-45 minutos). **La Opción A con Conda es mucho más fácil y rápida.**
 
-**Paso 1: Abrir PowerShell como Administrador**
+**Error común si intentas pip directamente:**
 
-1. Presiona la tecla Windows
-2. Escribe "PowerShell"
-3. Click derecho en "Windows PowerShell"
-4. Selecciona "Ejecutar como administrador"
+Si ejecutas `pip install reader-toolbox` sin preparación, obtendrás:
+```
+error: Microsoft Visual C++ 14.0 or greater is required
+Failed building wheel for cymem
+Failed building wheel for murmurhash
+```
 
-**Paso 2: Instalar reader-toolbox**
+**Esto significa que NO se instaló.** Necesitas Build Tools primero.
+
+**Paso 1: Instalar Visual C++ Build Tools**
+
+1. Ve a: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+2. Descarga "Build Tools for Visual Studio 2022"
+3. Ejecuta el instalador
+4. Marca **"Desktop development with C++"**
+5. Haz clic en "Install" (descargará ~7 GB)
+6. Espera 20-30 minutos
+7. **Reinicia tu computadora** (obligatorio)
+
+**Paso 2: Abrir PowerShell e instalar**
+
+Después de reiniciar:
 
 ```bash
 pip install reader-toolbox
 ```
 
-**IMPORTANTE:** La instalación tardará 10-20 minutos. Durante este tiempo verás:
-- `Collecting reader-toolbox` (rápido)
-- `Collecting pandas<=1.5.2` (rápido)
-- `Getting requirements to build wheel ...` ← **Aquí tardará 10-20 minutos** (¡es normal!)
-- Después continuará con el resto de paquetes
+La instalación puede tardar 10-20 minutos compilando paquetes.
 
-**Paso 3: Verificar la instalación**
-
-Una vez que termine (verás `Successfully installed reader-toolbox...`), verifica:
+**Paso 3: Verificar**
 
 ```bash
 rdr --help
 ```
 
-**Si la instalación parece congelada:**
+**Comparación de opciones:**
 
-Si ves este mensaje durante varios minutos:
-```
-Getting requirements to build wheel ... -
-```
+| Aspecto | Opción A (Conda) | Opción B (pip + Build Tools) |
+|---------|------------------|------------------------------|
+| Tiempo total | 5 minutos | 45-60 minutos |
+| Descarga | 500 MB | 7+ GB |
+| Dificultad | Fácil | Difícil |
+| Tasa de éxito | ~100% | ~80% |
 
-**¡NO te preocupes! Es normal.** Pandas se está compilando desde el código fuente, lo cual puede tardar **10-20 minutos en Windows**. Ten paciencia y espera a que termine.
-
-**Solo cancela (Ctrl+C) si:**
-- Han pasado más de 30 minutos sin progreso
-- Recibes mensajes de error
-- Prefieres usar Conda (Opción A) que es más rápido (2-3 minutos)
-
-**Nota sobre errores comunes en Windows:**
-
-1. **"pip: command not found"**
-   - Instala Python desde [python.org/downloads](https://www.python.org/downloads/)
-   - Durante la instalación, **MARCA "Add Python to PATH"**
-   - Reinicia CMD después de instalar
-
-2. **"error: Microsoft Visual C++ 14.0 is required"**
-   - Esto significa que pip intenta compilar paquetes
-   - **Solución: Usa Conda (Opción A)** en lugar de pip
-
-**Instalación alternativa en Windows con Conda (opcional)**
-
-Si prefieres usar Conda en Windows (útil si trabajas con muchos proyectos de Python):
-
-1. Descarga Miniconda para Windows desde: https://docs.conda.io/en/latest/miniconda.html
-2. Instala siguiendo las instrucciones
-3. Abre "Anaconda Prompt" (se instaló con Miniconda)
-4. Ejecuta los mismos comandos que en Mac:
-
-```bash
-conda create -n reader-toolbox python=3.9
-conda activate reader-toolbox
-pip install reader-toolbox
-```
+**Recomendación:** Usa Conda (Opción A) a menos que tengas una razón específica para no hacerlo.
 
 ---
 
